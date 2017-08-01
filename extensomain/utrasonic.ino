@@ -4,7 +4,7 @@
 
 bool data_filled = 0;
 
-static uint16_t signal[N_BUFFER];
+static uint16_t sig[N_BUFFER];
 uint8_t edge = 0;
 
 uint32_t t_wait = 100;  // t_wait value in millis
@@ -36,10 +36,10 @@ void startWaitTimer(){
 }
 
 void sampleSignal(uint16_t ch){
-  initADC(signal);
+  initADC(sig);
 
   adc_start(ADC);
-  delay(5);  
+  delay(10);  
   adc_stop(ADC);
 }
 
@@ -55,15 +55,47 @@ void sendIRPulse(){
 }
 
 void getUltrasonicWave(uint16_t channel){
+	//reset
+  digitalWrite(2, HIGH);
+  delay(100);
+  digitalWrite(2, LOW); 
+	
 	// setup gpios and registers
   Timer3.attachInterrupt(stopTimer3);
 
-  // send IR pulse here
+                                                                
+
+  // send IR pulse her
   sendIRPulse();
-  while (ir_pulse_counter<IRPULSEMAX);
+  //while (ir_pulse_counter<IRPULSEMAX);
 
   // start t_wait timer
   Timer3.start(t_wait);
-
+  
+  //Serial.write("before sample");
   sampleSignal(channel);
+  //Serial.write("helloTin");
+  //Serial.write(channel);
+
+  int sizesignal = sizeof(sig);
+  int i;
+  //Serial.write(sizesignal);
+  i=0;
+  while(i<N_BUFFER){
+    Serial1.println(sig[i]);
+    //Serial.println();
+    i=i+1;
+  }
+  Serial1.println("DONE");
 }
+
+
+
+
+
+
+
+
+
+
+

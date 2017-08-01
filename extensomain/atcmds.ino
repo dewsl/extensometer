@@ -31,19 +31,18 @@ void getArguments(String at_cmd, String *arguments){
 	} while(f_exit);
 
 }
-
 void getATCommand(){
 	String serial_line, command;
 	int i_equals = 0;
 	
 	do{
-		serial_line = Serial.readStringUntil('\r\n');
+		serial_line = Serial1.readStringUntil('\r\n');
 	}while(serial_line == "");
 	serial_line.toUpperCase();
 	serial_line.replace("\r","");
 
 	// echo command if ate is set, default true
-	if (ate) Serial.println(serial_line);
+	if (ate) Serial1.println(serial_line);
 
 	// get characters before '='
 	i_equals = serial_line.indexOf('=');
@@ -53,14 +52,14 @@ void getATCommand(){
 	// Serial.println(command);
 	
 	if (command == ATCMD)
-		Serial.println(OKSTR);
+		Serial1.println(OKSTR);
 	else if (command == ATECMDTRUE){
 		ate = true;
-		Serial.println(OKSTR);
+		Serial1.println(OKSTR);
 	}
 	else if (command == ATECMDFALSE){
 		ate = false;
-		Serial.println(OKSTR);
+		Serial1.println(OKSTR);
 	}
 	else if (command == SAMPLEULTRASONIC){
 		
@@ -70,7 +69,7 @@ void getATCommand(){
 		sendIRPulse();
 	}
 	else{
-		Serial.println(ERRORSTR);
+		Serial1.println(ERRORSTR);
 	}
 
 }

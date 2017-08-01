@@ -1,6 +1,6 @@
 #include <DueTimer.h>
 #include <stdlib.h>
-#define N_BUFFER 2000
+#define N_BUFFER 8000
 #undef HID_ENABLED
 
 // Arduino Due ADC->DMA->USB 1MSPS
@@ -15,10 +15,11 @@
 void setup(){
   // SerialUSB.begin(0);
   // while(!SerialUSB);
-  Serial.begin(115200);
-  Serial.setTimeout(10000);
-  // Serial.println("due");
-  pinMode(2, OUTPUT);
+  Serial1.begin(115200);
+  //Serial.setTimeout(100);
+  // Serial1.println("due");
+  pinMode(2, OUTPUT);             
+  
 
 }
 
@@ -32,7 +33,9 @@ void loop(){
   // getArguments("AT+UTS=0,15,re,67y",args);
 
   // for (uint8_t i=0; (i<5)&args[i]!=""; i++){
-  //   Serial.print("arg ");
+
+
+
   //   Serial.print(i);
   //   Serial.print(": ");
   //   Serial.println(args[i]);
