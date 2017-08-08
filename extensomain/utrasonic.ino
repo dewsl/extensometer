@@ -87,6 +87,8 @@ void getUltrasonicWave(uint16_t channel){
     i=i+1;
   }
   Serial1.println("DONE");
+
+  digitalWrite(2, HIGH);
 }
 
 
