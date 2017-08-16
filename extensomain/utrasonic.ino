@@ -82,11 +82,16 @@ void getUltrasonicWave(uint16_t channel){
   //Serial.write(sizesignal);
   i=0;
   while(i<N_BUFFER){
-    Serial1.println(sig[i]);
+    //Serial1.println(sig[i]);
     //Serial.println();
+
+    Serial1.write((sig[i]>>8)&0xFF);
+    Serial1.write(sig[i] & 0xFF);
     i=i+1;
   }
-  Serial1.println("DONE");
+
+  int done=0;
+  Serial1.write(done & 0xFF);
 
   digitalWrite(2, HIGH);
 }
