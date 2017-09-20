@@ -1,6 +1,6 @@
 #include <DueTimer.h>
 #include <stdlib.h>
-#define N_BUFFER 8000
+#define N_BUFFER 12000
 #undef HID_ENABLED
 
 // Arduino Due ADC->DMA->USB 1MSPS
